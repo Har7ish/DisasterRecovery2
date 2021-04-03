@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <h2>Add Machine</h2>
+    <form [formGroup]="machineForm" (ngSubmit)="onSubmit(machineForm)">
+
+      <label>Machine Code</label>
+      <input type="text" [class.is-invalid]="machine_code.invalid && machine_code.touched" 
+      formControlName="machine_code" class="form-control">
+          <div *ngIf="machine_code.touched && machine_code.errors">
+            <div class="alert alert-danger" *ngIf="machine_code.errors.required">machine code is required</div>
+            <div class="alert alert-danger" *ngIf="machine_code.errors.minlength">machine code must be a minimum of 3 characters</div>
+          </div>
+      
+        <label>Description</label>
+        <input type="text" [class.is-invalid]="description.invalid && description.touched" 
+        formControlName="description" class="form-control">
+            <div *ngIf="description.errors && description.touched">
+              <div class="alert alert-danger" *ngIf="description.errors?.required">Description is required</div>
+              <div class="alert alert-danger" *ngIf="description.errors?.minlength">Description must be at least 3 characters</div>
+            </div>
+  
+        <label>Hourly Rent</label>
+        <input type="text" [class.is-invalid]="hourly_rent.invalid && hourly_rent.touched" 
+        formControlName="hourly_rent" class="form-control">
+            <div *ngIf="hourly_rent.errors && hourly_rent.touched">
+              <div class="alert alert-danger" *ngIf="hourly_rent.errors?.required">Hourly Rent is required</div>
+              <div class="alert alert-danger" *ngIf="hourly_rent.errors?.minlength">Hourly Rent must be less than $1000000</div>
+            </div>
+  
+        <label>Max Hours</label>
+        <input type="text" [class.is-invalid]="maxhoursperday.invalid && maxhoursperday.touched" 
+        formControlName="maxhoursperday" class="form-control">
+            <div *ngIf="maxhoursperday.touched && maxhoursperday.errors">
+              <div class="alert alert-danger" *ngIf="maxhoursperday.errors.required">maxhoursperday is required</div>
+              <div class="alert alert-danger" *ngIf="maxhoursperday.errors.max">maxhoursperday must be less than 24 hrs</div>
+            </div><br>
+            
+            
+       <button class="btn btn-primary" [disabled]="!machineForm.valid" type="submit">Submit form</button>
+  
+   
+    </form>
+  </div>
+  

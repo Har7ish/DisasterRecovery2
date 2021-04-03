@@ -1,0 +1,38 @@
+<td><button style="background-color:green" (click)="addMachine()">Add</button>
+<table class="table">
+    <thead>
+    <tr>
+        
+        <th scope="col">Machine Code</th>
+        <th scope="col">Description</th>
+        <th scope="col">Hourly Rent</th>
+        <th scope="col">Max Hours/Day</th>
+        
+        
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of machine; let i=index">
+      <th scope="row" (click)="detselect(m)" >{{m.machine_code}}</th>
+      <td>{{m.description}}</td>
+      <td>{{m.hourly_rent}}</td>
+      <td>{{m.maxhoursperday}}</td>
+      
+      <td><button style="background-color:blue" (click)="editMachine(m)">Edit</button> 
+        <!-- <button style="background-color:red"
+       
+        mwlConfirmationPopover
+        [popoverTitle]="popoverTitle" 
+        [popoverMessage]="popoverMessage"
+        placement="right"
+        (confirm)="deleteMachine(m)"
+        (cancel)="cancelClicked = true"
+      >
+        Delete
+      </button> -->
+        
+      
+    </tr>
+      
+    </tbody>
+  </table>

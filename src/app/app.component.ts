@@ -9,4 +9,3 @@ export class AppComponent {
   title = 'disaster-recovery-project';
 }
 
-// hi
