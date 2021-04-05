@@ -12,6 +12,19 @@ class SerializeJob(serializers.ModelSerializer):
         fields=('code','description','hourly_rate','maxhoursperday')
 
 class SerializeTimecard(serializers.ModelSerializer):
+    
     class Meta:
         model=Timecard
-        fields=('sitecode','contractor_name','total_hours','total_amount','status')
+        fields=('sitecode','contractor_name','job','machine','total_hours','total_amount','status')
+        depth=1
+    
+    # def to_representation(self, instance):
+    #     self.fields['job'] =  SerializeJob(read_only=True)
+    #     self.fields['machine'] = SerializeMachine(read_only=True)
+    #     return super(SerializeTimecard, self).to_representation(instance)
+    
+   
+
+
+
+       

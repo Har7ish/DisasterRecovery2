@@ -8,11 +8,11 @@ urlpatterns=[
     re_path(r'^machine/$',views.MachineListView.as_view()),
     re_path(r'^machine/([a-zA-Z0-9_]+)$',views.MachineView.as_view()),
 
-    # re_path(r'^job/$',views.jobApi),
-    # re_path(r'^job/([0-9]+)$',views.jobApi),
+    re_path(r'^job/$',views.JobListView.as_view()),
+    re_path(r'^job/([a-zA-Z0-9_]+)$',views.JobView.as_view()),
 
-    # re_path(r'^timecard/$',views.timecardApi),
-    # re_path(r'^timecard/([0-9]+)$',views.timecardApi),
+    re_path(r'^timecard/$',views.TCListView.as_view()),
+    re_path(r'^timecard/([a-zA-Z0-9_]+)$',views.TCView.as_view()),
     
 
 ]

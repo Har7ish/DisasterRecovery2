@@ -31,9 +31,14 @@ class Job(models.Model):
 class Timecard(models.Model):
     sitecode = models.CharField(max_length=50,primary_key=True,unique=True,default='')
     contractor_name = models.CharField(max_length=75,default='')
-    total_hours = models.IntegerField(default=0)
+    job=models.ManyToManyField(Job, null=True)
+    machine=models.ManyToManyField(Machine, null=True)
+    total_hours = models.IntegerField(null=True,blank=True,default=None)
     total_amount = models.FloatField(null=True,blank=True,default=None)
-    status = "review"
+    status = models.BooleanField(default=False)
+
+    # job=models.ForeignKey(Job, to_field='code', on_delete=models.SET_NULL, null=True)
+    # machine=models.ForeignKey(Machine, to_field='machine_code', on_delete=models.SET_NULL, null=True)
 
 
     class Meta:

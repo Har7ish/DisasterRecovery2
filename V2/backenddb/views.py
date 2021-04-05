@@ -68,63 +68,111 @@ class MachineView(APIView):
 
 
 ##############################################################Job API#################################################################### 
+class JobListView(APIView):
+    def get(self, request, format=None):
+        job = Job.objects.all()
+        job = SerializeJob(job, many=True)
+        return Response(job.data) 
 
-# @csrf_exempt
-# def jobApi(request,id=0):
-#     if request.method=='GET':
-#         job = Job.objects.all()
-#         job_serializer = SerializeJob(job, many=True)
-#         return JsonResponse(job_serializer.data, safe=False)
+    def post(self,request, format=None):
+        job_data=JSONParser().parse(request)
+        job_serializer = SerializeJob(data=job_data)
+        if job_serializer.is_valid():
+            job_serializer.save()
+            return JsonResponse("Added Successfully!!" , safe=False)
+        return JsonResponse("Failed to Add.",safe=False)
 
-#     elif request.method=='POST':
-#         job_data=JSONParser().parse(request)
-#         job_serializer = SerializeJob(data=job_data)
-#         if job_serializer.is_valid():
-#             job_serializer.save()
-#             return JsonResponse("Added Successfully!!" , safe=False)
-#         return JsonResponse("Failed to Add.",safe=False)
+class JobView(APIView):
+
+    def get_object(self, jc):
+        try:
+            return Job.objects.get(code=jc)
+        except Job.DoesNotExist:
+            raise Http404
+
+    def get(self, request, jc, Format=None): 
+        job = SerializeJob(self.get_object(jc))
+        return Response(job.data)
     
-#     elif request.method=='PUT':
-#         job_data = JSONParser().parse(request)
-#         job=Job.objects.get(code=job_data['code'])
-#         job_serializer=SerializeJob(job,data=job_data)
-#         if job_serializer.is_valid():
-#             job_serializer.save()
-#             return JsonResponse("Updated Successfully!!", safe=False)
-#         return JsonResponse("Failed to Update.", safe=False)
 
-#     elif request.method=='DELETE':
-#         job=Job.objects.get(code=id)
-#         job.delete()
-#         return JsonResponse("Deleted Succeffully!!", safe=False)
+    def put(self, request, jc, format=None):
+        job_data = JSONParser().parse(request)
+        job=Job.objects.get(code=job_data['code'])
+        job_serializer=SerializeJob(job,data=job_data)
+        if job_serializer.is_valid():
+           job_serializer.save()
+           return JsonResponse("Updated Successfully!!", safe=False)
+        return JsonResponse("Failed to Update.", safe=False)
+
+    def delete(self,request, jc, format=None):
+
+        job=Job.objects.get(code=jc)
+        job.delete()
+        return JsonResponse("Deleted Successfully!!", safe=False)
+
 
 # #########################################################TimeCard API###############################################################
 
-# @csrf_exempt
-# def timecardApi(request,id=0):
-#     if request.method=='GET':
-#         timecard = Timecard.objects.all()
-#         timecard_serializer = SerializeTimecard(timecard, many=True)
-#         return JsonResponse(timecard_serializer.data, safe=False)
+class TCListView(APIView):
+    def get(self, request, format=None):
+        tc = Timecard.objects.all()
+        tc = SerializeTimecard(tc, many=True)
+        return Response(tc.data) 
 
-#     elif request.method=='POST':
-#         timecard_data=JSONParser().parse(request)
-#         timecard_serializer = SerializeTimecard(data=timecard_data)
-#         if timecard_serializer.is_valid():
-#             timecard_serializer.save()
-#             return JsonResponse("Added Successfully!!" , safe=False)
-#         return JsonResponse("Failed to Add.",safe=False)
+    # def post(self,request, format=None):
+    #     tc_data=JSONParser().parse(request)
+    #     tc_serializer = SerializeTimecard(data=tc_data)
+    #     if tc_serializer.is_valid():
+    #         tc_serializer.save()
+    #         return JsonResponse("Added Successfully!!" , safe=False)
+    #     return JsonResponse("Failed to Add.",safe=False)
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+
+        new_tc = Timecard.objects.create(
+            sitecode=data["sitecode"], contractor_name=data["contractor_name"], total_hours=data["total_hours"], total_amount=data["total_amount"],status=data["status"])
+
+        new_tc.save()
+
+        for job in data["job"]:
+            job_obj = Job.objects.get(code=job["code"])
+            new_tc.job.add(job_obj)
+        
+        for machine in data["machine"]:
+            machine_obj = Machine.objects.get(machine_code=machine["machine_code"])
+            new_tc.machine.add(machine_obj)
+        
+        tc_serializer = SerializeTimecard(new_tc)
+        return Response(tc_serializer.data)
+
+
+
+
+class TCView(APIView):
+
+    def get_object(self, sc):
+        try:
+            return Timecard.objects.get(sitecode=sc)
+        except Timecard.DoesNotExist:
+            raise Http404
+
+    def get(self, request, sc, Format=None): 
+        tc = SerializeTimecard(self.get_object(sc))
+        return Response(tc.data)
     
-#     elif request.method=='PUT':
-#         timecard_data = JSONParser().parse(request)
-#         timecard=Job.objects.get(sitecode=timecard_data['sitecode'])
-#         timecard_serializer=SerializeTimecard(timecard,data=timecard_data)
-#         if timecard_serializer.is_valid():
-#             timecard_serializer.save()
-#             return JsonResponse("Updated Successfully!!", safe=False)
-#         return JsonResponse("Failed to Update.", safe=False)
 
-#     elif request.method=='DELETE':
-#         timecard=Timecard.objects.get(code=id)
-#         timecard.delete()
-#         return JsonResponse("Deleted Succeffully!!", safe=False)
+    def put(self, request, sc, format=None):
+        tc_data = JSONParser().parse(request)
+        tc=Timecard.objects.get(sitecode=tc_data['sitecode'])
+        tc_serializer=SerializeTimecard(tc,data=tc_data)
+        if tc_serializer.is_valid():
+           tc_serializer.save()
+           return JsonResponse("Updated Successfully!!", safe=False)
+        return JsonResponse("Failed to Update.", safe=False)
+
+    def delete(self,request, sc, format=None):
+
+        tc=Timecard.objects.get(sitecode=sc)
+        tc.delete()
+        return JsonResponse("Deleted Successfully!!", safe=False)
