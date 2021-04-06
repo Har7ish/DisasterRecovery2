@@ -15,13 +15,13 @@ class SerializeTimecard(serializers.ModelSerializer):
     
     class Meta:
         model=Timecard
-        fields=('sitecode','contractor_name','job','machine','total_hours','total_amount','status')
+        fields=('sitecode','contractor_name','job','machine','total_job_hours','total_machine_hours','total_amount','status')
         depth=1
     
-    # def to_representation(self, instance):
-    #     self.fields['job'] =  SerializeJob(read_only=True)
-    #     self.fields['machine'] = SerializeMachine(read_only=True)
-    #     return super(SerializeTimecard, self).to_representation(instance)
+    def to_representation(self, instance):
+        self.fields['job'] =  SerializeJob(many=True, read_only=True)
+        self.fields['machine'] = SerializeMachine(many=True,read_only=True)
+        return super(SerializeTimecard, self).to_representation(instance)
     
    
 

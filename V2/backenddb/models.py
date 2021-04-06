@@ -1,5 +1,7 @@
 from django.db import models
 
+
+
 class Machine(models.Model):
     machine_code = models.CharField(max_length=50,primary_key=True,unique=True,default='')
     description = models.CharField(max_length=100,unique=False,default='')
@@ -31,10 +33,11 @@ class Job(models.Model):
 class Timecard(models.Model):
     sitecode = models.CharField(max_length=50,primary_key=True,unique=True,default='')
     contractor_name = models.CharField(max_length=75,default='')
-    job=models.ManyToManyField(Job, null=True)
-    machine=models.ManyToManyField(Machine, null=True)
-    total_hours = models.IntegerField(null=True,blank=True,default=None)
-    total_amount = models.FloatField(null=True,blank=True,default=None)
+    job=models.ManyToManyField(Job)
+    machine=models.ManyToManyField(Machine)
+    total_job_hours = models.IntegerField(null=True,blank=True,default=0)
+    total_machine_hours=models.IntegerField(null=True,blank=True,default=0)
+    total_amount = models.FloatField(null=True,blank=True,default=0)
     status = models.BooleanField(default=False)
 
     # job=models.ForeignKey(Job, to_field='code', on_delete=models.SET_NULL, null=True)

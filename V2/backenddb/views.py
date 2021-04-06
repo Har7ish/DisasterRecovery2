@@ -131,7 +131,18 @@ class TCListView(APIView):
         data = request.data
 
         new_tc = Timecard.objects.create(
-            sitecode=data["sitecode"], contractor_name=data["contractor_name"], total_hours=data["total_hours"], total_amount=data["total_amount"],status=data["status"])
+            sitecode=data["sitecode"], contractor_name=data["contractor_name"])
+
+        if "total_amount" in data:
+            new_tc.total_amount=data["total_amount"]
+        if "total_job_hours" in data:
+            new_tc.total_job_hours=data["total_job_hours"]
+        if "total_machine_hours" in data:
+            new_tc.total_machine_hours=data["total_machine_hours"]
+        if "status" in data:
+            new_tc.status=data["status"]
+
+
 
         new_tc.save()
 
