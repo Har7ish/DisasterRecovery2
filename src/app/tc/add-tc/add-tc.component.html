@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <h2>Add Timecard</h2>
+    <form [formGroup]="tcForm" (ngSubmit)="onSubmit(tcForm)">
+
+      <label>Site Code</label>
+      <input type="text" [class.is-invalid]="sitecode.invalid && sitecode.touched" 
+      formControlName="sitecode" class="form-control">
+          <div *ngIf="sitecode.touched && sitecode.errors">
+            <div class="alert alert-danger" *ngIf="sitecode.errors.required">job sitecode is required</div>
+            <div class="alert alert-danger" *ngIf="sitecode.errors.minlength">job sitecode must be a minimum of 3 characters</div>
+          </div>
+      
+        <label>Contractor Name</label>
+        <input type="text" [class.is-invalid]="contractor_name.invalid && contractor_name.touched" 
+        formControlName="contractor_name" class="form-control">
+            <div *ngIf="contractor_name.errors && contractor_name.touched">
+              <div class="alert alert-danger" *ngIf="contractor_name.errors?.required">contractor_name is required</div>
+              <div class="alert alert-danger" *ngIf="contractor_name.errors?.minlength">contractor_name must be at least 3 characters</div>
+            </div>
+        
+        <label>Job</label>
+        <!-- <select code="code" formControlName="job">
+          <option value="" disabled>Choose your city</option>
+          <option *ngFor="let city of City" [ngValue]="city">{{city}}</option>
+       </select> -->
+
+       <select id="job" formControlName="job">
+       <option *ngFor="let t of dropdownlist" [ngValue]="t">{{t}}</option> 
+       </select><br>
+        <!-- <input type="text" [class.is-invalid]="job.invalid && job.touched" 
+        formControlName="job" class="form-control">
+            <div *ngIf="job.errors && job.touched">
+              <div class="alert alert-danger" *ngIf="job.errors?.required">job code is required</div>
+              <div class="alert alert-danger" *ngIf="job.errors?.minlength">job code must be atleast 3 characters</div>
+            </div> -->
+  
+        <label>Machine</label>
+        <select id="machine" formControlName="machine">
+          <option *ngFor="let t of mlist" [ngValue]="t">{{t}}</option> 
+          </select><br>
+       
+       
+       
+       
+       
+        <!-- <input type="text" [class.is-invalid]="machine.invalid && machine.touched" 
+        formControlName="machine" class="form-control">
+            <div *ngIf="machine.touched && machine.errors">
+              <div class="alert alert-danger" *ngIf="machine.errors.required">machine code is required</div>
+              <div class="alert alert-danger" *ngIf="machine.errors.minlength">machine must atleast three characters </div>
+            </div><br> -->
+
+        <label>Total Job Hours</label>
+        <input type="text" [class.is-invalid]="total_job_hours.invalid && total_job_hours.touched" 
+        formControlName="total_job_hours" class="form-control">
+            <div *ngIf="total_job_hours.touched && total_job_hours.errors">
+              <div class="alert alert-danger" *ngIf="total_job_hours.errors.required">total_hours is required</div>
+              <div class="alert alert-danger" *ngIf="total_job_hours.errors.max">total_hours must be less than 24 hrs</div>
+              </div><br>
+
+        <label>Total Machine Hours</label>
+        <input type="text" [class.is-invalid]="total_machine_hours.invalid && total_machine_hours.touched" 
+        formControlName="total_machine_hours" class="form-control">
+            <div *ngIf="total_machine_hours.touched && total_machine_hours.errors">
+              <div class="alert alert-danger" *ngIf="total_machine_hours.errors.required">total_hours is required</div>
+              <div class="alert alert-danger" *ngIf="total_machine_hours.errors.max">total_hours must be less than 24 hrs</div>
+              </div><br>
+            
+            
+       <button class="btn btn-primary" [disabled]="!tcForm.valid" type="submit">Submit form</button>
+  
+   
+    </form>
+  </div>

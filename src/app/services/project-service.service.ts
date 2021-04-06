@@ -17,7 +17,7 @@ export class ProjectServiceService {
     .pipe(catchError(this.errorHandler));
    }
 
-  getMbyCode(id:number): Observable<any[]>{
+  getMbyCode(id:any): Observable<any[]>{
     return this.http.get<any[]>(this._url+'machine/'+id)
    .pipe(catchError(this.errorHandler));
   }
@@ -25,20 +25,79 @@ export class ProjectServiceService {
   errorHandler(error: HttpErrorResponse){
    return throwError(error.message || "Server Error")
   }
-///////////
+
   postMachine(mData:any): Observable<any[]>{
     return this.http.post<any[]>(this._url+'machine/', mData)
     .pipe(catchError(this.errorHandler));
 }
 
-  updateMachine(id: number, mData:any): Observable<any[]>{
+  updateMachine(id: any, mData:any): Observable<any[]>{
     console.log(mData)
-    console.log(this._url + '/' + id)
+    console.log(this._url + 'machine/' + id)
     return this.http.put<any[]>(this._url + 'machine/' + id, mData)
     .pipe(catchError(this.errorHandler));
 }
 
-  deleteMachine(id: number) {
+  deleteMachine(id: any) {
     return this.http.delete(this._url + 'machine/' + id);
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+getJob(): Observable<any[]>{
+  return this.http.get<any[]>(this._url+'job')
+  .pipe(catchError(this.errorHandler));
+ }
+
+getJbyCode(id:any): Observable<any[]>{
+  return this.http.get<any[]>(this._url+'job/'+id)
+ .pipe(catchError(this.errorHandler));
+}
+
+
+
+postJob(jData:any): Observable<any[]>{
+  return this.http.post<any[]>(this._url+'job/', jData)
+  .pipe(catchError(this.errorHandler));
+}
+
+updateJob(id: any, jData:any): Observable<any[]>{
+  console.log(jData)
+  console.log(this._url + 'job/' + id)
+  return this.http.put<any[]>(this._url + 'job/' + id, jData)
+  .pipe(catchError(this.errorHandler));
+}
+
+deleteJob(id: any) {
+  return this.http.delete(this._url + 'job/' + id);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+getTC(): Observable<any[]>{
+  return this.http.get<any[]>(this._url+'timecard')
+  .pipe(catchError(this.errorHandler));
+ }
+
+getTCbyCode(id:any): Observable<any[]>{
+  return this.http.get<any[]>(this._url+'timecard/'+id)
+ .pipe(catchError(this.errorHandler));
+}
+
+
+
+postTC(tcData:any): Observable<any[]>{
+  return this.http.post<any[]>(this._url+'timecard/', tcData)
+  .pipe(catchError(this.errorHandler));
+}
+
+// updateJob(id: any, jData:any): Observable<any[]>{
+//   console.log(jData)
+//   console.log(this._url + 'job/' + id)
+//   return this.http.put<any[]>(this._url + 'job/' + id, jData)
+//   .pipe(catchError(this.errorHandler));
+// }
+
+// deleteJob(id: any) {
+//   return this.http.delete(this._url + 'job/' + id);}
+
 }

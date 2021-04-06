@@ -1,15 +1,15 @@
 <div class="container-fluid">
     <br>
-      <h2>Edit Machine</h2>
+      <h2>Edit Job</h2>
       <div >
-      <form *ngIf="editmachineForm" [formGroup]="editmachineForm" (ngSubmit)="update(machine.machine_code, machine)" novalidate>
+      <form *ngIf="editjobForm" [formGroup]="editjobForm" (ngSubmit)="update(job.code, job)" novalidate>
         <div class="form-group">
-            <label>Machine Code</label>
+            <label>Job Code</label>
             <input type="text" 
-            formControlName="machine_code" class="form-control">
-                <div *ngIf="machine_code && machine_code.errors && machine_code.touched">
-                  <div class="alert alert-danger" *ngIf="machine_code.errors?.required">Machine Code is required</div>
-                  <div class="alert alert-danger" *ngIf="machine_code.errors?.minlength">Machine Code must be at least 3 characters</div>
+            formControlName="code" class="form-control">
+                <div *ngIf="code && code.errors && code.touched">
+                  <div class="alert alert-danger" *ngIf="code.errors?.required">Job Code is required</div>
+                  <div class="alert alert-danger" *ngIf="code.errors?.minlength">Job Code must be at least 3 characters</div>
                 </div>
         </div>
 
@@ -24,12 +24,12 @@
         </div>
     
         <div class="form-group">
-            <label>Hourly Rent</label>
+            <label>Hourly Rate</label>
             <input type="text" 
-            formControlName="hourly_rent" class="form-control">
-                <div *ngIf="hourly_rent && hourly_rent.touched && hourly_rent.errors">
-                  <div class="alert alert-danger" *ngIf="hourly_rent.errors.required">Hourly Rent is required</div>
-                  <div class="alert alert-danger" *ngIf="hourly_rent.errors.max">Hourly Rent must be less than $1000000</div>
+            formControlName="hourly_rate" class="form-control">
+                <div *ngIf="hourly_rate && hourly_rate.touched && hourly_rate.errors">
+                  <div class="alert alert-danger" *ngIf="hourly_rate.errors.required">Hourly rate is required</div>
+                  <div class="alert alert-danger" *ngIf="hourly_rate.errors.max">Hourly rate must be less than $1000000</div>
                 </div><br>
         </div>
 
@@ -44,10 +44,11 @@
         </div>
 
 
-        <button class="btn btn-primary" [disabled]="editmachineForm.invalid" type="submit">Update form</button>
+        <button class="btn btn-primary" [disabled]="editjobForm.invalid" type="submit">Update form</button>
       </form>
     </div>
       <div class="alert alert-danger" *ngIf="errorMsg">
         {{errorMsg}}
       </div>
     </div>
+

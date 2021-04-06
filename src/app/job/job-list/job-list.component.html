@@ -1,0 +1,38 @@
+<td><button style="background-color:green" (click)="addJob()">Add</button>
+    <table class="table">
+        <thead>
+        <tr>
+            
+            <th scope="col">Job Code</th>
+            <th scope="col">Description</th>
+            <th scope="col">Hourly Rate</th>
+            <th scope="col">Max Hours/Day</th>
+            
+            
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let j of job; let i=index">
+          <th scope="row" >{{j.code}}</th>
+          <td>{{j.description}}</td>
+          <td>{{j.hourly_rate}}</td>
+          <td>{{j.maxhoursperday}}</td>
+          
+          <td><button style="background-color:blue" (click)="editJob(j)">Edit</button> 
+            <button style="background-color:red"
+           
+            mwlConfirmationPopover
+            [popoverTitle]="popoverTitle" 
+            [popoverMessage]="popoverMessage"
+            placement="right"
+            (confirm)="deleteJob(j)"
+            (cancel)="cancelClicked = true"
+          >
+            Delete
+          </button>
+            
+          
+        </tr>
+          
+        </tbody>
+      </table>

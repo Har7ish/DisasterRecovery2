@@ -1,0 +1,43 @@
+<table class="table">
+    <thead>
+    <tr>
+        
+        <th scope="col">Site Code</th>
+        <th scope="col">Contractor Name</th>
+        <th scope="col">Total Time</th>
+        <th scope="col">Total Amount</th>
+        <th scope="col">Status</th>
+        
+        
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of tc; let i=index">
+      <th scope="row" >{{t.sitecode}}</th>
+      <td>{{t.contractor_name}}</td>
+      <!-- <td *ngFor="let j of t.job">{{t.total_amount+(j.hourly_rent*t.total_hours)}}</td> -->
+      <td>{{t|totalTime}}</td>
+      <td>{{t|totalAmount}}</td>
+      <td>{{t.status|status}}</td>
+      <!-- (click)="getTotalAmount(i)" -->
+      <!-- <td>{{total_TC_amount}}</td> -->
+      <!-- <td>{{t.machine.hourly_rent}}</td> -->
+      
+      <!-- <td><button style="background-color:blue" (click)="editJob(j)">Edit</button> 
+        <button style="background-color:red"
+       
+        mwlConfirmationPopover
+        [popoverTitle]="popoverTitle" 
+        [popoverMessage]="popoverMessage"
+        placement="right"
+        (confirm)="deleteJob(j)"
+        (cancel)="cancelClicked = true"
+      >
+        Delete
+      </button> -->
+        
+      
+    </tr>
+      
+    </tbody>
+  </table>
