@@ -19,37 +19,28 @@
             </div>
         
         <label>Job</label>
-        <!-- <select code="code" formControlName="job">
-          <option value="" disabled>Choose your city</option>
-          <option *ngFor="let city of City" [ngValue]="city">{{city}}</option>
-       </select> -->
-
        <select id="job" formControlName="job">
        <option *ngFor="let t of dropdownlist" [ngValue]="t">{{t}}</option> 
        </select><br>
-        <!-- <input type="text" [class.is-invalid]="job.invalid && job.touched" 
-        formControlName="job" class="form-control">
-            <div *ngIf="job.errors && job.touched">
-              <div class="alert alert-danger" *ngIf="job.errors?.required">job code is required</div>
-              <div class="alert alert-danger" *ngIf="job.errors?.minlength">job code must be atleast 3 characters</div>
-            </div> -->
+
+       <label>Job</label>
+       <select id="job" formControlName="job">
+       <option *ngFor="let t of dropdownlist" [ngValue]="t">{{t}}</option> 
+       </select><br>
+        
   
         <label>Machine</label>
         <select id="machine" formControlName="machine">
           <option *ngFor="let t of mlist" [ngValue]="t">{{t}}</option> 
           </select><br>
-       
-       
-       
-       
-       
-        <!-- <input type="text" [class.is-invalid]="machine.invalid && machine.touched" 
-        formControlName="machine" class="form-control">
-            <div *ngIf="machine.touched && machine.errors">
-              <div class="alert alert-danger" *ngIf="machine.errors.required">machine code is required</div>
-              <div class="alert alert-danger" *ngIf="machine.errors.minlength">machine must atleast three characters </div>
-            </div><br> -->
 
+
+          <label>Machine</label>
+          <select id="machine" formControlName="machine">
+            <option *ngFor="let t of mlist" [ngValue]="t">{{t}}</option> 
+            </select><br>
+       
+      
         <label>Total Job Hours</label>
         <input type="text" [class.is-invalid]="total_job_hours.invalid && total_job_hours.touched" 
         formControlName="total_job_hours" class="form-control">

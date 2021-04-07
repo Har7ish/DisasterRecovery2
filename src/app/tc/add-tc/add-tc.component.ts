@@ -96,12 +96,20 @@ export class AddTcComponent implements OnInit {
       "contractor_name": this.tcForm.value.contractor_name,
       "job": [
           {
-              "code":this.tcForm.value.job
-          }    
+            "code":this.tcForm.value.job
+          },
+          
+          {
+            "code":this.tcForm.value.job
+          }
       ],
       "machine": [
           {
-              "machine_code": this.tcForm.value.machine
+            "machine_code": this.tcForm.value.machine
+          },
+
+          {
+            "machine_code":this.tcForm.value.machine
           }
   
       ],

@@ -90,12 +90,12 @@ postTC(tcData:any): Observable<any[]>{
   .pipe(catchError(this.errorHandler));
 }
 
-// updateJob(id: any, jData:any): Observable<any[]>{
-//   console.log(jData)
-//   console.log(this._url + 'job/' + id)
-//   return this.http.put<any[]>(this._url + 'job/' + id, jData)
-//   .pipe(catchError(this.errorHandler));
-// }
+updateTC(id: any, TCData:any): Observable<any[]>{
+  console.log(TCData)
+  console.log(this._url + 'timecard/' + id)
+  return this.http.put<any[]>(this._url + 'timecard/' + id, TCData)
+  .pipe(catchError(this.errorHandler));
+}
 
 // deleteJob(id: any) {
 //   return this.http.delete(this._url + 'job/' + id);}

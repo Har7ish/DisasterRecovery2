@@ -10,6 +10,7 @@ import { MachineDetailsComponent } from './machine/machine-details/machine-detai
 import { MachineListComponent } from './machine/machine-list/machine-list.component';
 import { AddTcComponent } from './tc/add-tc/add-tc.component';
 import { TcListComponent } from './tc/tc-list/tc-list.component';
+import { TcReviewComponent } from './tc/tc-review/tc-review.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path:'addjob',component:AddJobComponent},
   {path:'editjob/:id',component:EditJobComponent},
   {path:'timecards',component:TcListComponent},
-  {path:'addtimecard',component:AddTcComponent}
+  {path:'addtimecard',component:AddTcComponent},
+  {path:'reviewtimecard',component:TcReviewComponent}
   // {path:'**', component:PageNotFoundComponent}
   
 ];

@@ -1,0 +1,31 @@
+<table class="table">
+    <thead>
+    <tr>
+        
+        <th scope="col">Site Code</th>
+        <th scope="col">Contractor Name</th>
+        <th scope="col">Total Time</th>
+        <th scope="col">Total Amount</th>
+        <th scope="col">Status</th>
+        
+        
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of tcr; let i=index">
+      <th scope="row" >{{t.sitecode}}</th>
+      <td>{{t.contractor_name}}</td>      
+      <td>{{t|totalTime}}</td>
+      <td>{{t|totalAmount}}</td>
+      <td>{{t.status|status}}</td>
+
+      <td><button style="background-color:blue" (click)="approve(t.sitecode,t)">Approve</button>
+        
+      
+        
+      
+    </tr>
+      
+    </tbody>
+  </table>
+
